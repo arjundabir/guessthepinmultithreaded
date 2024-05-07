@@ -64,6 +64,6 @@ def main(num_of_threads):
 if __name__ == "__main__":
     while ((10_000 % thread_count != 0) and (thread_count < 100)):
         thread_count = int(
-            input("How many threads would you like to run? Must be divide 10,000 evenly.\n"))
+            input("How many threads would you like to run? Must be divide 10,000 evenly and be between 1-99.\nEnter amount here:"))
     main(thread_count)
     print("Done!")

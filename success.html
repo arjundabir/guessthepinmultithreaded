@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width" name="viewport"/>
+<title>Guess the PIN</title>
+<meta content="How long does it take the internet to guess a randomly-selected, four-digit PIN? Try for yourself!" name="description"/>
+<meta content="Guess the PIN" property="og:title"/>
+<meta content="How long does it take the internet to guess a randomly-selected, four-digit PIN? Try for yourself!" property="og:description"/>
+<meta content="How long does it take the internet to guess a randomly-selected, four-digit PIN? Try for yourself!" name="twitter:card"/>
+<meta content="https://www.guessthepin.com" property="og:url"/>
+<link href="https://www.guessthepin.com" rel="canonical"/>
+<meta content="https://www.guessthepin.com/android-chrome-512x512.png" property="og:image"/>
+<meta content="Brand colors for the website www.guessthepin.com." property="og:image:alt"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="website" property="og:type"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,600;1,400&amp;family=Questrial&amp;display=swap" rel="stylesheet"/>
+<style>
+/* Variables */
+:root {
+	--black: 34, 34, 34;
+	--blue: 66, 107, 145;
+	--red: 188, 61, 30;
+	--tan-dark: 241, 236, 227;
+	--tan-light: 249, 247, 243;
+	--white: 255, 255, 255;
+	--yellow: 230, 198, 58;
+	
+}
+body {
+	background: rgb(var(--tan-light));
+	color: rgb(var(--black));
+	font-family: 'Alegreya', Serif;
+	font-size: 20px;
+	font-weight: 400;
+	margin: 0;
+	padding: 0;
+	text-rendering: optimizeLegibility;
+}
+h1 {
+	font-family: 'Questrial', Sans-Serif;
+	font-size: 48px;
+	font-weight: 400;
+	margin: 0 0 20px;
+	padding: 0;
+	text-align: center;
+	text-transform: uppercase;
+}
+h1 a {
+	font-weight: 400;
+}
+sup {
+	line-height: 0;
+	position: relative;
+	text-transform: none;
+	vertical-align: baseline;
+}
+sup.article {
+	font-family: 'Alegreya', Serif;
+	font-size: 24px;
+	font-style: italic;
+	font-weight: 400;
+	top: -7px;
+}
+sup.trademark {
+	font-size: 20px;
+	top: -19px;
+}
+h2 {
+	font-weight: 600;
+	font-size: 32px;
+	margin: 20px 0 0 0;
+	text-align: center;
+}
+#winner h2 {
+	color: rgb(var(--red));
+	font-family: 'Questrial', Sans-Serif;
+	font-size: 48px;
+	font-weight: 400;
+	margin: 15px 0;
+	padding: 0;
+	text-align: center;
+}
+h3 {
+	font-size: 20px;
+	line-height: 24px;
+	font-weight: 600;
+	font-variant-numeric: lining-nums;
+	margin: 0;
+	padding: 0;
+}
+h3.blog {
+	font-size: 24px;
+	line-height: 26px;
+}
+#winner h3 {
+	font-size: 24px;
+	text-align: center;
+}
+p {
+	line-height: 24px;
+	margin: 0 0 20px 0;
+	padding: 0;
+}
+a {
+	color: rgb(var(--black));
+	font-weight: 600;
+	text-decoration: none;
+}
+a.alt {
+	color: rgb(var(--blue));
+}
+strong {
+	color: rgb(var(--red));
+	font-weight: 600;
+}
+strong.alt {
+	color: rgb(var(--black));
+}
+.pin {
+	font-feature-settings: "tnum";
+}
+#container {
+	margin: 15px auto 20px;
+	position: relative;
+	width: 300px;
+}
+form {
+	margin: 0;
+	padding: 0;
+}
+label {
+	display: block;
+	font-size: 20px;
+	font-weight: 600;
+	margin: -4px 0 8px 0;
+	padding: 0;
+}
+input {
+	border: 2px solid rgb(var(--blue));
+	border-radius: 6px;
+	font-family: 'Questrial', Sans-Serif;
+	font-size: 48px;
+	height: 71px;
+	margin: 0 6px 20px 0;
+	padding: 0 10px;
+	width: 195px;
+}
+input:focus {
+    outline-width: 0;
+}
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+input[type=number] {
+	-moz-appearance: textfield;
+}
+input[type=submit] {
+	-webkit-appearance: none;
+	background: rgb(var(--blue));
+	color: rgb(var(--white));
+	cursor: pointer;
+	font-family: 'Alegreya', Serif;
+	font-size: 22px;
+	font-weight: 600;
+	height: 75px;
+	margin: 0 0 20px 0;
+	padding: 0;
+	width: 75px;
+}
+.ad {
+	height: 250px;
+	margin: 0 0 20px 0;
+	text-align: center;
+	width: 300px;
+}
+svg {
+	position: absolute;
+	top: 482px;
+}
+table {
+	border-collapse: collapse;
+	margin: 0 0 20px 0;
+	width: 100%;
+}
+th {
+	border-bottom: 1px solid rgb(var(--black));
+	text-align: left;
+}
+th, td {
+	width: 33%;
+}
+th.tac-l, td.tac-l {
+	border-left: 1px solid rgb(var(--black));
+	width: 9%;
+}
+th.tac-r, td.tac-r {
+	border-right: 1px solid rgb(var(--black));
+	width: 9%;
+}
+th.tac, td.tac {
+	width: 15%;
+	text-align: right;
+}
+th.tar, td.tar {
+	text-align: right;
+}
+.tab {
+	font-feature-settings: "tnum";
+	font-variant-numeric: lining-nums;
+}
+hr {
+	border-top: 1px solid rgb(var(--black));
+	margin-top: 0;
+	margin-bottom: 20px;
+	padding: 0;
+}
+#footer p {
+	line-height: 22px;
+	text-align: center;
+}
+#footer p.first {
+	word-spacing: 5px;
+	margin: 0;
+}
+#footer a.alt {
+	color: rgb(var(--black));
+	font-weight: 400;
+}
+#footer a.alt:hover {
+	color: rgb(var(--blue));
+}
+/* GDPR Styles */
+#GDPR {
+	background-color: rgba(var(--yellow), 0.6);
+	padding: 15px;
+	margin: 0 0 20px 0;
+}
+#GDPR p {
+	line-height: 22px;
+	margin: 0;
+}
+#GDPR input[type=submit] {
+	-webkit-appearance: none;
+	background: rgb(var(--blue));
+	color: rgb(var(--white));
+	font-size: 20px;
+	height: 48px;
+	margin: 0;
+	padding: 0;
+	width: 48px;
+}
+.left {
+	width: 80%;
+}
+.right {
+	text-align: right;
+	width: 20%;
+}
+/* Menu Styles */
+#menu {
+	margin: 0 0 20px 0;
+}
+.spacer-l, .spacer-r  {
+	border-bottom: 1px solid rgb(var(--black));
+	float: left;
+	height: 45px;
+	width: 3.3%;
+}
+.spacer-r {
+	margin-left: -1px;
+}
+.item {
+	background: rgb(var(--tan-dark));
+	border: 1px solid rgb(var(--black));
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	height: 44px;
+	float: left;
+	margin-left: -1px;
+	width: 23%;
+}
+.item h2 {
+	font-family: 'Alegreya', Serif;
+	font-size: 20px;
+	font-weight: 600;
+	margin: 8px 0;
+	text-transform: none;
+}
+.on {
+	background: rgb(var(--tan-light));
+	border-bottom: none;
+	color: rgb(var(--black));
+}
+/* Misc Styles */
+.float {
+	float: left;
+}
+.clear {
+	clear: both;
+}
+.mobile {
+	display: block;
+}
+.desktop {
+	display: none;
+}
+
+@media only screen and (min-width: 360px) {
+	h1 {
+		height: 55px;
+		font-size: 54px;
+	}
+	h2 {
+		font-size: 32px;
+	}
+	sup.article {
+		font-size: 26px;
+		top: -8px;
+	}
+	sup.trademark {
+		font-size: 22px;
+		top: -22px;
+	}
+	input {
+		width: 208px;
+	}
+	input[type=submit] {
+		width: 98px;
+	}
+	#container {
+		width: 336px;
+	}
+	.ad {
+		height: 280px;
+		width: 336px;
+	}
+	.mobile {
+		display: none;
+	}
+	.desktop {
+		display: inline;
+	}
+}
+@media only screen and (min-width: 516px) {
+	body {
+		font-size: 22px;
+	}
+	h1 {
+		height: 55px;
+		font-size: 72px;
+		margin-bottom: 34px;
+	}
+	sup.article {
+		font-size: 32px;
+	    top: -9px;
+	}
+	sup.trademark {
+		font-size: 26px;
+		top: -31px;
+	}
+	.item h2 {
+		font-size: 22px;
+	}
+	h3 {
+		font-size: 22px;
+		line-height: 25px;
+	}
+	h3.blog {
+		font-size: 26px;
+		line-height: 28px;
+	}
+	p {
+		line-height: 26px;
+		margin: 0 0 22px 0;
+	}
+	#menu {
+	    margin: 0 0 22px 0;
+	}
+	#container {
+		width: 480px;
+	}
+	label {
+		font-size: 22px;
+	}
+	input {
+		margin-bottom: 22px;
+		width: 313px;
+	}
+	input[type=submit] {
+		font-size: 24px;
+		width: 136px;
+	}
+	#GDPR input[type=submit] {
+	    font-size: 24px;
+	}
+	table {
+		margin: 0 0 22px 0;
+	}
+	.ad {
+		margin: 0 0 22px 0;
+		min-height: 300px;
+		width: 480px;
+	}
+	#footer p {
+		font-size: 20px;
+	}
+}
+@media only screen and (min-width: 763px) {
+	#GDPR p.left {
+		margin-top: 13px;
+	}
+}
+</style><link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/site.webmanifest" rel="manifest"/>
+<script>
+// A big thank you to https://www.cssscript.com/confetti-falling-animation/
+var maxParticleCount = 150; //set max confetti count
+var particleSpeed = 2; //set the particle animation speed
+var startConfetti; //call to start confetti animation
+var stopConfetti; //call to stop adding confetti
+var toggleConfetti; //call to start or stop the confetti animation depending on whether it's already running
+var removeConfetti; //call to stop the confetti animation and remove all confetti immediately
+
+(function() {
+	startConfetti = startConfettiInner;
+	stopConfetti = stopConfettiInner;
+	toggleConfetti = toggleConfettiInner;
+	removeConfetti = removeConfettiInner;
+	var colors = ["#426b91","#bc3d1e","#e6c63a"]
+	var streamingConfetti = false;
+	var animationTimer = null;
+	var particles = [];
+	var waveAngle = 0;
+	
+	function resetParticle(particle, width, height) {
+		particle.color = colors[(Math.random() * colors.length) | 0];
+		particle.x = Math.random() * width;
+		particle.y = Math.random() * height - height;
+		particle.diameter = Math.random() * 10 + 5;
+		particle.tilt = Math.random() * 10 - 10;
+		particle.tiltAngleIncrement = Math.random() * 0.07 + 0.05;
+		particle.tiltAngle = 0;
+		return particle;
+	}
+
+	function startConfettiInner() {
+		var width = window.innerWidth;
+		var height = window.innerHeight;
+		window.requestAnimFrame = (function() {
+			return window.requestAnimationFrame ||
+				window.webkitRequestAnimationFrame ||
+				window.mozRequestAnimationFrame ||
+				window.oRequestAnimationFrame ||
+				window.msRequestAnimationFrame ||
+				function (callback) {
+					return window.setTimeout(callback, 16.6666667);
+				};
+		})();
+		var canvas = document.getElementById("confetti-canvas");
+		if (canvas === null) {
+			canvas = document.createElement("canvas");
+			canvas.setAttribute("id", "confetti-canvas");
+			canvas.setAttribute("style", "display:block;z-index:999999;pointer-events:none; position: absolute; top: 0;");
+			document.body.appendChild(canvas);
+			canvas.width = width;
+			canvas.height = height;
+			window.addEventListener("resize", function() {
+				canvas.width = window.innerWidth;
+				canvas.height = window.innerHeight;
+			}, true);
+		}
+		var context = canvas.getContext("2d");
+		while (particles.length < maxParticleCount)
+			particles.push(resetParticle({}, width, height));
+		streamingConfetti = true;
+		if (animationTimer === null) {
+			(function runAnimation() {
+				context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+				if (particles.length === 0)
+					animationTimer = null;
+				else {
+					updateParticles();
+					drawParticles(context);
+					animationTimer = requestAnimFrame(runAnimation);
+				}
+			})();
+		}
+	}
+
+	function stopConfettiInner() {
+		streamingConfetti = false;
+	}
+
+	function removeConfettiInner() {
+		stopConfetti();
+		particles = [];
+	}
+
+	function toggleConfettiInner() {
+		if (streamingConfetti)
+			stopConfettiInner();
+		else
+			startConfettiInner();
+	}
+
+	function drawParticles(context) {
+		var particle;
+		var x;
+		for (var i = 0; i < particles.length; i++) {
+			particle = particles[i];
+			context.beginPath();
+			context.lineWidth = particle.diameter;
+			context.strokeStyle = particle.color;
+			x = particle.x + particle.tilt;
+			context.moveTo(x + particle.diameter / 2, particle.y);
+			context.lineTo(x, particle.y + particle.tilt + particle.diameter / 2);
+			context.stroke();
+		}
+	}
+
+	function updateParticles() {
+		var width = window.innerWidth;
+		var height = window.innerHeight;
+		var particle;
+		waveAngle += 0.01;
+		for (var i = 0; i < particles.length; i++) {
+			particle = particles[i];
+			if (!streamingConfetti && particle.y < -15)
+				particle.y = height + 100;
+			else {
+				particle.tiltAngle += particle.tiltAngleIncrement;
+				particle.x += Math.sin(waveAngle);
+				particle.y += (Math.cos(waveAngle) + particle.diameter + particleSpeed) * 0.5;
+				particle.tilt = Math.sin(particle.tiltAngle) * 15;
+			}
+			if (particle.x > width + 20 || particle.x < -20 || particle.y > height) {
+				if (streamingConfetti && particles.length <= maxParticleCount)
+					resetParticle(particle, width, height);
+				else {
+					particles.splice(i, 1);
+					i--;
+				}
+			}
+		}
+	}
+})();
+</script></head>
+<body onload="startConfetti()">
+<div id="container">
+<h1><a href="/">Guess <sup class="article">the</sup> PIN<sup class="trademark">™</sup></a></h1>
+<nav id="menu">
+<div class="spacer-l"></div>
+<div class="item on"><h2>Home</h2></div>
+<a href="/statistics"><div class="item"><h2>Stats</h2></div></a>
+<a href="/blog"><div class="item"><h2>Blog</h2></div></a>
+<a href="/faq"><div class="item"><h2>FAQ</h2></div></a>
+<div class="spacer-r"></div>
+<div class="clear"></div>
+</nav>
+<div id="winner">
+<h3>Holy Moley!<br/>You guessed the PIN!</h3>
+<h2>9360</h2>
+<p>This is cause for celebration! On average, this happens once only every <strong>17,280 guesses</strong>. Better take a screenshot or photo to prove it to all your friends. Or just sit here and enjoy the confetti party.</p>
+</div>
+<div id="footer">
+<p class="first"><a href="/">Home</a> <a href="/terms">Terms</a> <a href="/privacy">Privacy</a></p>
+<p>© 2024 <a class="alt" href="http://www.boredbutton.com">Bored Button</a> LLC</p>
+</div></div>
+<script>(function(){if (!document.body) return;var js = "window['__CF$cv$params']={r:'8803d0cfdec02ef0',t:'MTcxNTExMjIzMC41MjUwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+</html>
