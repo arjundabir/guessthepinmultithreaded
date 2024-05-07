@@ -11,13 +11,13 @@ Given that there 10^4 indepedent "pins" with the assumption that each guess take
 Clone the project
 
 ```bash
-  git clone https://github.com/arjundabir/guessthepinmultithreaded/
+  git clone https://github.com/arjundabir/guessthepinmultithreaded/ guess_the_pin_multithreaded
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd guess_the_pin_multithreaded
 ```
 
 Install packages
